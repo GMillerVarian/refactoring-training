@@ -70,7 +70,8 @@ namespace UnitTestProject
                 {
                     Console.SetIn(reader);
 
-                    Tusc.Start(users, products);
+                    Tusc tusc = new Tusc(users, products);
+                    tusc.Start();
                 }
             }
         }
@@ -86,7 +87,8 @@ namespace UnitTestProject
                 {
                     Console.SetIn(reader);
 
-                    Tusc.Start(users, products);
+                    Tusc tusc = new Tusc(users, products);
+                    tusc.Start();
                 }
 
                 Assert.IsTrue(writer.ToString().Contains("You entered an invalid user"));
@@ -104,7 +106,8 @@ namespace UnitTestProject
                 {
                     Console.SetIn(reader);
 
-                    Tusc.Start(users, products);
+                    Tusc tusc = new Tusc(users, products);
+                    tusc.Start();
                 }
             }
         }
@@ -120,7 +123,8 @@ namespace UnitTestProject
                 {
                     Console.SetIn(reader);
 
-                    Tusc.Start(users, products);
+                    Tusc tusc = new Tusc(users, products);
+                    tusc.Start();
                 }
 
                 Assert.IsTrue(writer.ToString().Contains("You entered an invalid password"));
@@ -138,7 +142,8 @@ namespace UnitTestProject
                 {
                     Console.SetIn(reader);
 
-                    Tusc.Start(users, products);
+                    Tusc tusc = new Tusc(users, products);
+                    tusc.Start();
                 }
 
                 Assert.IsTrue(writer.ToString().Contains("Purchase cancelled"));
@@ -151,7 +156,7 @@ namespace UnitTestProject
         {
             // Update data file
             List<User> tempUsers = DeepCopy<List<User>>(originalUsers);
-            tempUsers.Where(u => u.Name == "Jason").Single().Bal = 0.0;
+            tempUsers.Where(u => u.username == "Jason").Single().balance = 0.0;
 
             using (var writer = new StringWriter())
             {
@@ -161,7 +166,8 @@ namespace UnitTestProject
                 {
                     Console.SetIn(reader);
 
-                    Tusc.Start(tempUsers, products);
+                    Tusc tusc = new Tusc(tempUsers, products);
+                    tusc.Start();
                 }
 
                 Assert.IsTrue(writer.ToString().Contains("You do not have enough money to buy that"));
@@ -173,7 +179,7 @@ namespace UnitTestProject
         {
             // Update data file
             List<Product> tempProducts = DeepCopy<List<Product>>(originalProducts);
-            tempProducts.Where(u => u.Name == "Chips").Single().Qty = 0;
+            tempProducts.Where(u => u.Name == "Chips").Single().Quantity = 0;
 
             using (var writer = new StringWriter())
             {
@@ -183,7 +189,8 @@ namespace UnitTestProject
                 {
                     Console.SetIn(reader);
 
-                    Tusc.Start(users, tempProducts);
+                    Tusc tusc = new Tusc(users, tempProducts);
+                    tusc.Start();
                 }
 
                 Assert.IsTrue(writer.ToString().Contains("is out of stock"));

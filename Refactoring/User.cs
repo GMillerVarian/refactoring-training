@@ -7,14 +7,16 @@ using System.Threading.Tasks;
 
 namespace Refactoring
 {
-    [Serializable]
-    public class User
-    {
-        [JsonProperty("Username")]
-        public string Name;
-        [JsonProperty("Password")]
-        public string Pwd;
-        [JsonProperty("Balance")]
-        public double Bal;
-    }
+  [Serializable]
+  public class User
+  {
+    [JsonProperty("Username")]
+    public string username;
+
+    [JsonProperty("Password")]
+    public string password;
+
+    [JsonProperty("Balance")]
+    public double balance;
+  }
 }

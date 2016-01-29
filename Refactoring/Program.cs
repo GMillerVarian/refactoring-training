@@ -7,17 +7,25 @@ using System.Text;
 
 namespace Refactoring
 {
-    public class Program
+  public class Program
+  {
+    public static void Main(string[] args)
     {
-        public static void Main(string[] args)
-        {
-            // Load users from data file
-            List<User> users = JsonConvert.DeserializeObject<List<User>>(File.ReadAllText(@"Data/Users.json"));
+      List<User> users = getUsers();
+      List<Product> products = getProducts();
 
-            // Load products from data file
-            List<Product> products = JsonConvert.DeserializeObject<List<Product>>(File.ReadAllText(@"Data/Products.json"));
-
-            Tusc.Start(users, products);
-        }
+      Tusc tusc = new Tusc(users, products);
+      tusc.Start();
     }
+
+    private static List<Product> getProducts()
+    {
+      return JsonConvert.DeserializeObject<List<Product>>(File.ReadAllText(@"Data/Products.json"));
+    }
+
+    private static List<User> getUsers()
+    {
+      return JsonConvert.DeserializeObject<List<User>>(File.ReadAllText(@"Data/Users.json"));
+    }
+  }
 }
